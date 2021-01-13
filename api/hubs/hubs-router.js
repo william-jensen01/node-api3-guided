@@ -74,6 +74,7 @@ router.delete('/:id', checkHubId, (req, res) => {
 });
 
 router.put('/:id', checkHubId, (req, res) => {
+  //here 
   Hubs.update(req.params.id, req.body)
     .then(hub => {
       res.status(200).json(hub);
