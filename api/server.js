@@ -10,7 +10,7 @@ server.use((req, res, next) => {
   next()
   // CAREFUL!!!!!!!
 
-  // 1- order of middlewares is important
+  // 1- order of USAGE middlewares is important
   // 2- do not send back a response twice by accident:
 
   // if (true) {
