@@ -7,10 +7,12 @@ const server = express();
 server.use(express.json());
 server.use((req, res, next) => {
   console.log('welcome to my app')
-  if (true) {
-    res.json('you can not go any further')
-  }
-  res.json('you can not go any further')
+  next()
+  // CAREFUL!!!!!!!
+  // if (true) {
+  //   res.json('you can not go any further')
+  // }
+  // res.json('you can not go any further')
 })
 
 const hubsRouterPipeline = [logger, logger, logger]
