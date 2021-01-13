@@ -7,7 +7,7 @@ const router = express.Router();
 
 const { checkHubId, checkNewHub } = require('../middleware')
 
-router.get('/', (req, res) => {
+router.get('/', (req, res, next) => {
   Hubs.find(req.query)
     .then(hubs => {
       res.status(200).json(hubs);
