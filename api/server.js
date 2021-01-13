@@ -5,6 +5,11 @@ const hubsRouter = require('./hubs/hubs-router.js');
 const server = express();
 
 server.use(express.json());
+
+const hubsRouterPipeline = [logger, logger, logger]
+
+server.use('/api/hubs', hubsRouterPipeline , hubsRouter);
+
 server.use((req, res, next) => {
   console.log('welcome to my app')
   next()
@@ -18,10 +23,6 @@ server.use((req, res, next) => {
   // }
   // res.json('you can not go any further')
 })
-
-const hubsRouterPipeline = [logger, logger, logger]
-
-server.use('/api/hubs', hubsRouterPipeline , hubsRouter);
 
 server.get('/', (req, res) => {
   const nameInsert = (req.name) ? ` ${req.name}` : '';
