@@ -6,6 +6,7 @@ const Messages = require('../messages/messages-model.js');
 const router = express.Router();
 
 function checkHubId(req, res, next) {
+  console.log('checking hub id')
   next()
   // inside middlewares we have access to req and res objects
   // here we can query db, modify request, validate request...
