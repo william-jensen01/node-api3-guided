@@ -4,7 +4,7 @@ const hubsRouter = require('./hubs/hubs-router.js');
 
 const server = express();
 
-
+server.use(express.json());
 server.use((req, res, next) => {
   console.log('welcome to my app')
   next()
@@ -20,7 +20,7 @@ server.use((req, res, next) => {
 })
 
 const hubsRouterPipeline = [logger, logger, logger]
-server.use(express.json());
+
 server.use('/api/hubs', hubsRouterPipeline , hubsRouter);
 
 server.get('/', (req, res) => {
