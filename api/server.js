@@ -18,3 +18,9 @@ server.get('/', (req, res) => {
 });
 
 module.exports = server;
+
+
+function logger(req, res, next) {
+  console.log('falling into hubs router')
+  next()
+}
