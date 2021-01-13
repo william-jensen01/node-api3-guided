@@ -9,6 +9,7 @@ function checkHubId() {
   // whatever you want goes here
   // make a choice
   // allowing the request to proceed to the next middleware
+  // or send a response to the client
 }
 
 router.get('/', (req, res) => {
