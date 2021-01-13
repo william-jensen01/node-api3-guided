@@ -22,4 +22,8 @@ async function checkHubId(req, res, next) {
   //  - or send a response to the client
 }
 
-module.exports = { checkHubId }
+function  checkNewHub (params) {
+  
+}
+
+module.exports = { checkHubId, checkNewHub }
