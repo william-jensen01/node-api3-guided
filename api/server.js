@@ -6,7 +6,7 @@ const server = express();
 
 server.use(express.json());
 
-server.use('/api/hubs', logger, hubsRouter);
+server.use('/api/hubs', logger, logger, logger, hubsRouter);
 
 server.get('/', (req, res) => {
   const nameInsert = (req.name) ? ` ${req.name}` : '';
