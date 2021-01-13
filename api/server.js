@@ -7,7 +7,9 @@ const server = express();
 server.use(express.json());
 server.use((req, res, next) => {
   console.log('welcome to my app')
-  res.json('you can not go any further')
+  if (true) {
+    res.json('you can not go any further')
+  }
   res.json('you can not go any further')
 })
 
