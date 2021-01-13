@@ -11,8 +11,9 @@ async function checkHubId(req, res, next) {
   try {
     const hub = await Hubs.findById(req.params)
     console.log(hub)
+    next()
   } catch (error) {
-    
+    res.status(500).json('ouch')
   }
   // inside middlewares we have access to req and res objects
   // here we can query db, modify request, validate request...
