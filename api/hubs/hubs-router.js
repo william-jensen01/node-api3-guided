@@ -10,7 +10,9 @@ async function checkHubId(req, res, next) {
   res.set('X-Lambda-Header', 'rocks')
   try {
     const hub = await Hubs.findById(req.params.id)
-    console.log(hub)
+    if (hub) {
+      
+    }
     next()
   } catch (error) {
     res.status(500).json('ouch')
