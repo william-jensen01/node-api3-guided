@@ -9,7 +9,7 @@ async function checkHubId(req, res, next) {
   console.log('checking hub id')
   res.set('X-Lambda-Header', 'rocks')
   try {
-    const hub = await Hubs.findById(req.params)
+    const hub = await Hubs.findById(req.params.id)
     console.log(hub)
     next()
   } catch (error) {
