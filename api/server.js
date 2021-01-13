@@ -5,6 +5,7 @@ const hubsRouter = require('./hubs/hubs-router.js');
 const server = express();
 
 server.use(express.json());
+server.use(helmet())
 server.use((req, res, next) => {
   console.log('welcome to my app')
   next()
