@@ -13,6 +13,8 @@ async function checkHubId(req, res, next) {
     if (hub) {
       req.hub = hub
       next()
+    } else {
+      res.status(404).json(`hub with id ${req.params.id} not found`)
     }
   } catch (error) {
     res.status(500).json('ouch')
