@@ -98,4 +98,6 @@ router.post('/:id/messages', checkHubId, (req, res) => {
     });
 });
 
+res
+
 module.exports = router;
