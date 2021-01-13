@@ -6,7 +6,8 @@ const hubsRouter = require('./hubs/hubs-router.js');
 const server = express();
 
 server.use(express.json());
-server.use(helmet())
+server.use(helmet());
+server.use(cors());
 server.use((req, res, next) => {
   console.log('welcome to my app')
   next()
@@ -19,7 +20,7 @@ server.use((req, res, next) => {
   //   res.json('you can not go any further')
   // }
   // res.json('you can not go any further')
-})
+});
 
 const hubsRouterPipeline = [logger, logger, logger]
 
