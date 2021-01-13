@@ -6,7 +6,7 @@ const server = express();
 
 server.use(express.json());
 
-server.use('/api/hubs', hubsRouter);
+server.use('/api/hubs', logger, hubsRouter);
 
 server.get('/', (req, res) => {
   const nameInsert = (req.name) ? ` ${req.name}` : '';
@@ -18,7 +18,6 @@ server.get('/', (req, res) => {
 });
 
 module.exports = server;
-
 
 function logger(req, res, next) {
   console.log('falling into hubs router')
