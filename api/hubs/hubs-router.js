@@ -7,6 +7,7 @@ const router = express.Router();
 
 function checkHubId(req, res, next) {
   console.log('checking hub id')
+  res.set('X-Lambda-Header', 'rocks')
   next()
   // inside middlewares we have access to req and res objects
   // here we can query db, modify request, validate request...
