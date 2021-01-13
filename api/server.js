@@ -9,6 +9,10 @@ server.use((req, res, next) => {
   console.log('welcome to my app')
   next()
   // CAREFUL!!!!!!!
+
+  // 1- order of middlewares is important
+  // 2- do not send back a response twice by accident:
+
   // if (true) {
   //   res.json('you can not go any further')
   // }
