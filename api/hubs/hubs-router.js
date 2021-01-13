@@ -11,9 +11,9 @@ async function checkHubId(req, res, next) {
   try {
     const hub = await Hubs.findById(req.params.id)
     if (hub) {
-      
+      req.hub = hub
+      next()
     }
-    next()
   } catch (error) {
     res.status(500).json('ouch')
   }
