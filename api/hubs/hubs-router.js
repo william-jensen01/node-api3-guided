@@ -7,7 +7,7 @@ const router = express.Router();
 
 function checkHubId(req, res, next) {
   next()
-  // we have access to req and res objects
+  // inside middlewares we have access to req and res objects
   // here we can query db, modify request, validate request...
 
   // after we are done we make a choice:
