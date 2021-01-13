@@ -42,7 +42,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', checkHubId, (req, res) => {
-  res.status(200)
+  res.status(200).json(req.hub)
 });
 
 router.post('/', (req, res) => {
