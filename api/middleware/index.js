@@ -26,7 +26,12 @@ function checkNewHub(req, res, next) {
   // check that req body has correct shape
   // if req.body legit, proceed
   // otherwise send back a 400 error
-  if (req.body)
+  const { name } = req.body;
+  if (name) {
+    next();
+  } else {
+    res.status(400).json({ error: "please provide name" });
+  }
 }
 
 module.exports = { checkHubId, checkNewHub }
