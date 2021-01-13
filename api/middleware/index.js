@@ -1,3 +1,5 @@
+const Hubs = require('../hubs/hubs-model.js');
+
 async function checkHubId(req, res, next) {
   console.log('checking hub id')
   res.set('X-Lambda-Header', 'rocks')
