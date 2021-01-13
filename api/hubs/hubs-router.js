@@ -6,7 +6,9 @@ const Messages = require('../messages/messages-model.js');
 const router = express.Router();
 
 function checkHubId() {
-  // magic
+  // whatever you want goes here
+  // make a choice
+  // allowing the request to proceed to the next middleware
 }
 
 router.get('/', (req, res) => {
