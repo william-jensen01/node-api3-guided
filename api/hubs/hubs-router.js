@@ -100,7 +100,9 @@ router.post('/:id/messages', checkHubId, (req, res) => {
 
 router.use((error, req, res, next) => {
   res.status(500).json({
-    
+    info: 'something horrible happened inside the hubs router',
+    message: error.message,
+    stack: error.stack,
   })
 })
 
