@@ -22,10 +22,11 @@ async function checkHubId(req, res, next) {
   //  - or send a response to the client
 }
 
-function  checkNewHub (req, res,next ) {
+function checkNewHub(req, res, next) {
   // check that req body has correct shape
   // if req.body legit, proceed
   // otherwise send back a 400 error
+  if (req.body)
 }
 
 module.exports = { checkHubId, checkNewHub }
