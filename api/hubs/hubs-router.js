@@ -21,32 +21,22 @@ router.get('/:id', checkHubId, (req, res) => {
   res.status(200).json(req.hub)
 });
 
-router.post('/', checkNewHub, (req, res) => { // { name }
+router.post('/', checkNewHub, (req, res, next) => { // { name }
   Hubs.add(req.body)
     .then(hub => {
       res.status(201).json(hub);
     })
     .catch(error => {
-      // log error to server
-      console.log(error);
-      res.status(500).json({
-        message: 'Error adding the hub',
-      });
+      next(error)
     });
 });
 
-router.delete('/:id', checkHubId, (req, res) => {
+router.delete('/:id', checkHubId, (req, res, next) => {
   Hubs.remove(req.params.id)
     .then(count => {
       res.status(200).json({ message: 'The hub has been nuked' });
     })
-    .catch(error => {
-      // log error to server
-      console.log(error);
-      res.status(500).json({
-        message: 'Error removing the hub',
-      });
-    });
+    .catch(next);
 });
 
 router.put('/:id', checkHubId, (req, res) => {
