@@ -11,7 +11,7 @@ router.get('/', (req, res, next) => {
   Hubs.find(req.query)
     .then(hubs => {
       // here
-      throw new Error('nasty SQLite ERROR, BRUTAL')
+      // throw new Error('nasty SQLite ERROR, BRUTAL')
       res.status(200).json(hubs);
     })
     .catch(error => {
