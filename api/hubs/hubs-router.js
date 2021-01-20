@@ -5,6 +5,12 @@ const Messages = require('../messages/messages-model.js');
 
 const router = express.Router();
 
+router.use((req, res, next) => {
+  console.log('in the hubs router');
+  next();
+})
+
+// this only runs if the url has /api/hubs in it
 router.get('/', (req, res) => {
   Hubs.find(req.query)
     .then(hubs => {
@@ -19,25 +25,26 @@ router.get('/', (req, res) => {
     });
 });
 
-router.get('/:id', (req, res) => {
-  Hubs.findById(req.params.id)
-    .then(hub => {
-      if (hub) {
-        res.status(200).json(hub);
-      } else {
-        res.status(404).json({ message: 'Hub not found' });
-      }
-    })
-    .catch(error => {
-      // log error to server
-      console.log(error);
-      res.status(500).json({
-        message: 'Error retrieving the hub',
-      });
-    });
+router.get('/:id', validateID, (req, res) => {
+  res.status(300).json(req.hub);
+  // Hubs.findById(req.params.id)
+  //   .then(hub => {
+  //     if (hub) {
+  //       res.status(200).json(hub);
+  //     } else {
+  //       res.status(404).json({ message: 'Hub not found' });
+  //     }
+  //   })
+  //   .catch(error => {
+  //     // log error to server
+  //     console.log(error);
+  //     res.status(500).json({
+  //       message: 'Error retrieving the hub',
+  //     });
+  //   });
 });
 
-router.post('/', (req, res) => {
+router.post('/', validateBody, (req, res) => {
   Hubs.add(req.body)
     .then(hub => {
       res.status(201).json(hub);
@@ -51,7 +58,7 @@ router.post('/', (req, res) => {
     });
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', validateID, (req, res) => {
   Hubs.remove(req.params.id)
     .then(count => {
       if (count > 0) {
@@ -69,7 +76,7 @@ router.delete('/:id', (req, res) => {
     });
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', validateID, validateBody, (req, res) => {
   Hubs.update(req.params.id, req.body)
     .then(hub => {
       if (hub) {
@@ -87,7 +94,7 @@ router.put('/:id', (req, res) => {
     });
 });
 
-router.get('/:id/messages', (req, res) => {
+router.get('/:id/messages', validateID, (req, res) => {
   Hubs.findHubMessages(req.params.id)
     .then(messages => {
       res.status(200).json(messages);
@@ -101,7 +108,7 @@ router.get('/:id/messages', (req, res) => {
     });
 });
 
-router.post('/:id/messages', (req, res) => {
+router.post('/:id/messages', validateID, validateBody, (req, res) => {
   const messageInfo = { ...req.body, hub_id: req.params.id };
 
   Messages.add(messageInfo)
@@ -116,5 +123,32 @@ router.post('/:id/messages', (req, res) => {
       });
     });
 });
+
+function validateID(req, res, next) {
+  const { id } = req.params;
+  Hubs.findById(id)
+    .then(hub => {
+      if (hub) {
+        req.hub = hub;
+        next();
+      } else {
+        next({ message: "invalid hub id" })
+      }
+    })
+    .catch(err => {
+      console.log(err);
+      next({ code: 500, message: "failed to process", err })
+      res.status(500).json({ message: "failed to process" })
+    })
+}
+
+function validateBody(req, res, next) {
+  if (req.body && Object.keys(req.body).length > 0) {
+    next();
+  } else {
+    res.status(400).json({ message: "please include a request body" })
+  }
+}
+
 
 module.exports = router;
